@@ -78,7 +78,7 @@
         <!--Home-->
         <scene sceneID="Xe2-Or-HbK">
             <objects>
-                <viewController id="ANp-yn-ipF" customClass="HomeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" id="ANp-yn-ipF" customClass="HomeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9ix-hw-CZC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
