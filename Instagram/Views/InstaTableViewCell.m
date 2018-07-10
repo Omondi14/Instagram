@@ -8,6 +8,7 @@
 
 #import "InstaTableViewCell.h"
 
+
 @implementation InstaTableViewCell
 
 - (void)awakeFromNib {

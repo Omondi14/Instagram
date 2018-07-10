@@ -9,9 +9,12 @@
 #import "HomeViewController.h"
 #import "Parse.h"
 #import "ComposeViewController.h"
+#import "InstaTableViewCell.h"
+#import "Post.h"
 
 @interface HomeViewController () 
-@property (strong, nonatomic) NSArray *postsArray;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic,strong)NSMutableArray *postsArray;
 @end
 
 @implementation HomeViewController
@@ -19,7 +22,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
     
+    // call function to fetch posts
+    [self fetchPosts];
     
 }
 
@@ -28,11 +35,14 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void) fetchPostsData{
+-(void) fetchPosts{
     // construct query
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
-    [query whereKey:@"likesCount" greaterThan:@100];
+    [query includeKey:@"author"];
     query.limit = 20;
+    
+    // sort by descending order
+    [query orderByDescending:@"createdAt"];
     
     // fetch data asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
@@ -42,7 +52,10 @@
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
+        [self.tableView reloadData];
+
     }];
+    
 }
 
 - (IBAction)onTapLogOut:(id)sender {
@@ -64,13 +77,30 @@
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    UINavigationController *composeNavC = [segue destinationViewController];
+//// In a storyboard-based application, you will often want to do a little preparation before navigation
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    // Get the new view controller using [segue destinationViewController].
+//    // Pass the selected object to the new view controller.
+//    UINavigationController *composeNavC = [segue destinationViewController];
+//}
+
+
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    // dequeue reusable cell
+    InstaTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"InstaTableViewCell"];
+    
+    Post *post = self.postsArray[indexPath.row];
+    PFUser *postAuthor = post.author;
+    cell.mainPhotoView.image = post.image;
+    cell.usernameLabel.text = postAuthor.username;
+    
+    return cell;
 }
 
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.postsArray.count;
+}
 
 
 @end

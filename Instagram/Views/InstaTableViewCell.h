@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ParseUI.h"
 
 @interface InstaTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *mainPhotoView;
 
 @end

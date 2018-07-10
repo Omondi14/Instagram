@@ -108,12 +108,12 @@
 		263628F120F41984007CA88E /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				2619803B20F42A9C00E7FCE1 /* ComposeViewController.h */,
-				2619803C20F42A9C00E7FCE1 /* ComposeViewController.m */,
-				2619803820F41FA900E7FCE1 /* HomeViewController.h */,
-				2619803920F41FA900E7FCE1 /* HomeViewController.m */,
 				263628EE20F41769007CA88E /* LoginViewController.h */,
 				263628EF20F41769007CA88E /* LoginViewController.m */,
+				2619803820F41FA900E7FCE1 /* HomeViewController.h */,
+				2619803920F41FA900E7FCE1 /* HomeViewController.m */,
+				2619803B20F42A9C00E7FCE1 /* ComposeViewController.h */,
+				2619803C20F42A9C00E7FCE1 /* ComposeViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -400,10 +400,16 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Instagram/Pods-Instagram-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/Parse/Parse.bundle",
+				"${PODS_ROOT}/ParseUI/ParseUI/Resources/Localization/en.lproj",
+				"${PODS_ROOT}/ParseUI/ParseUI/Resources/Localization/fr.lproj",
+				"${PODS_ROOT}/ParseUI/ParseUI/Resources/Localization/pt-BR.lproj",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Parse.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/en.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/fr.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/pt-BR.lproj",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
