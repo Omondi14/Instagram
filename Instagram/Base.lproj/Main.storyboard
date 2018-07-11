@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -95,21 +96,47 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="429.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tvv-g9-JQ0">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tvv-g9-JQ0" customClass="PFImageView">
                                                     <rect key="frame" x="0.0" y="62" width="375" height="325"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.61020344680000005" green="0.11489217559999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="325" id="lvd-wI-vpe"/>
+                                                    </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="13T-Ua-sKE">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="13T-Ua-sKE">
                                                     <rect key="frame" x="15" y="33" width="121" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="121" id="gUg-55-dgd"/>
+                                                        <constraint firstAttribute="height" constant="21" id="t7g-AR-v1f"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Caption" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QO8-FN-zNu">
+                                                    <rect key="frame" x="15" y="395" width="360" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="360" id="4q9-zd-X99"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="tvv-g9-JQ0" firstAttribute="leading" secondItem="JPP-ZE-ROZ" secondAttribute="leading" id="08Y-Ve-BSI"/>
+                                                <constraint firstAttribute="bottom" secondItem="QO8-FN-zNu" secondAttribute="bottom" constant="13.5" id="BQ2-XB-MV1"/>
+                                                <constraint firstAttribute="trailing" secondItem="tvv-g9-JQ0" secondAttribute="trailing" id="Gf1-6H-LVO"/>
+                                                <constraint firstItem="QO8-FN-zNu" firstAttribute="leading" secondItem="JPP-ZE-ROZ" secondAttribute="leading" constant="15" id="GvV-08-xeN"/>
+                                                <constraint firstItem="13T-Ua-sKE" firstAttribute="leading" secondItem="JPP-ZE-ROZ" secondAttribute="leadingMargin" id="VKU-MQ-IrT"/>
+                                                <constraint firstItem="13T-Ua-sKE" firstAttribute="top" secondItem="JPP-ZE-ROZ" secondAttribute="topMargin" constant="22" id="Z79-8V-pKd"/>
+                                                <constraint firstItem="tvv-g9-JQ0" firstAttribute="top" secondItem="13T-Ua-sKE" secondAttribute="bottom" constant="8" id="bGd-Cs-hWJ"/>
+                                                <constraint firstItem="QO8-FN-zNu" firstAttribute="top" secondItem="tvv-g9-JQ0" secondAttribute="bottom" constant="8" id="n3I-iO-I0Z"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="mainPhotoView" destination="tvv-g9-JQ0" id="ctv-W5-sAp"/>
+                                            <outlet property="captionLabel" destination="QO8-FN-zNu" id="kKm-9N-aYe"/>
+                                            <outlet property="mainPhotoView" destination="tvv-g9-JQ0" id="8xb-R4-CkQ"/>
                                             <outlet property="usernameLabel" destination="13T-Ua-sKE" id="jQ5-He-dD0"/>
                                         </connections>
                                     </tableViewCell>

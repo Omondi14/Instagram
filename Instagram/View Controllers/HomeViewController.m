@@ -88,12 +88,18 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     // dequeue reusable cell
-    InstaTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"InstaTableViewCell"];
+    InstaTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"InstaTableViewCell" forIndexPath:indexPath];
     
+    // get specific post from your stored array of posts
     Post *post = self.postsArray[indexPath.row];
+    // set the file property of the PFPhotoView to the one in the queried post
+    cell.mainPhotoView.file = post.image;
+    [cell.mainPhotoView loadInBackground];
+    
+    //set username label to author of the post
     PFUser *postAuthor = post.author;
-    cell.mainPhotoView.image = post.image;
     cell.usernameLabel.text = postAuthor.username;
+    cell.captionLabel.text = post.caption;
     
     return cell;
 }

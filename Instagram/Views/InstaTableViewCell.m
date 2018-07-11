@@ -7,6 +7,7 @@
 //
 
 #import "InstaTableViewCell.h"
+#import "Post.h"
 
 
 @implementation InstaTableViewCell
@@ -14,6 +15,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+}
+
+- (void)showPhoto:(Post *)post {
+    self.mainPhotoView.file = post.image;
+    [self.mainPhotoView loadInBackground];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
