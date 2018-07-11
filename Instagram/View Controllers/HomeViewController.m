@@ -14,7 +14,9 @@
 
 @interface HomeViewController () 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic,strong)NSMutableArray *postsArray;
+@property (nonatomic,strong)NSArray *postsArray;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
+
 @end
 
 @implementation HomeViewController
@@ -27,6 +29,13 @@
     
     // call function to fetch posts
     [self fetchPosts];
+    
+    // refreshControl stuff
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
+    
+
     
 }
 
@@ -53,6 +62,7 @@
             NSLog(@"%@", error.localizedDescription);
         }
         [self.tableView reloadData];
+        [self.refreshControl endRefreshing];
 
     }];
     
