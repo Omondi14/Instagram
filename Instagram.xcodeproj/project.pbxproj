@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1E2FC5795F6806DD1B2A9BEA /* libPods-Instagram.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED8C6E79276A7747C8B9D48E /* libPods-Instagram.a */; };
 		22A81D4BEAC4DDF8E8A23415 /* libPods-InstagramTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87F7AD8ECD07DEADCD103F4D /* libPods-InstagramTests.a */; };
+		2604C19820F6A808002BAE3D /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2604C19720F6A808002BAE3D /* DetailsViewController.m */; };
 		2619803A20F41FA900E7FCE1 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2619803920F41FA900E7FCE1 /* HomeViewController.m */; };
 		2619803D20F42A9C00E7FCE1 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2619803C20F42A9C00E7FCE1 /* ComposeViewController.m */; };
 		2619804020F52ADB00E7FCE1 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 2619803F20F52ADB00E7FCE1 /* Post.m */; };
@@ -45,6 +46,8 @@
 		107B6ACFF68714C9C0CD6101 /* Pods-InstagramUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-InstagramUITests/Pods-InstagramUITests.release.xcconfig"; sourceTree = "<group>"; };
 		1A5096709706AF6C0C55CD80 /* libPods-InstagramUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-InstagramUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F1C23DED2B0F9BE6440D645 /* Pods-Instagram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instagram/Pods-Instagram.debug.xcconfig"; sourceTree = "<group>"; };
+		2604C19620F6A808002BAE3D /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
+		2604C19720F6A808002BAE3D /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		2619803820F41FA900E7FCE1 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		2619803920F41FA900E7FCE1 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		2619803B20F42A9C00E7FCE1 /* ComposeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
@@ -114,6 +117,8 @@
 				2619803920F41FA900E7FCE1 /* HomeViewController.m */,
 				2619803B20F42A9C00E7FCE1 /* ComposeViewController.h */,
 				2619803C20F42A9C00E7FCE1 /* ComposeViewController.m */,
+				2604C19620F6A808002BAE3D /* DetailsViewController.h */,
+				2604C19720F6A808002BAE3D /* DetailsViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -399,6 +404,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Instagram/Pods-Instagram-resources.sh",
+				"${PODS_ROOT}/DateTools/DateTools/DateTools/DateTools.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/Parse/Parse.bundle",
 				"${PODS_ROOT}/ParseUI/ParseUI/Resources/Localization/en.lproj",
 				"${PODS_ROOT}/ParseUI/ParseUI/Resources/Localization/fr.lproj",
@@ -406,6 +412,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/DateTools.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Parse.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/en.lproj",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/fr.lproj",
@@ -430,6 +437,7 @@
 				263628F020F41769007CA88E /* LoginViewController.m in Sources */,
 				2619803D20F42A9C00E7FCE1 /* ComposeViewController.m in Sources */,
 				2619803A20F41FA900E7FCE1 /* HomeViewController.m in Sources */,
+				2604C19820F6A808002BAE3D /* DetailsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
