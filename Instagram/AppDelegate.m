@@ -32,8 +32,24 @@
         
         self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"tabBarController"];
     }
+    else{
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        
+        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"loginVC"];
+    }
     
     return YES;
+}
+
+-(void) logout{
+    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
+        // PFUser.current() will now be nil
+        NSLog(@"Logged Out Successfully");
+        //[self dismissViewControllerAnimated:YES completion:nil];
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        
+        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"loginVC"];
+    }];
 }
 
 

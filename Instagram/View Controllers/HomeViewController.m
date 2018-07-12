@@ -12,6 +12,7 @@
 #import "InstaTableViewCell.h"
 #import "Post.h"
 #import "DetailsViewController.h"
+#import "AppDelegate.h"
 
 @interface HomeViewController () 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -72,7 +73,7 @@
 
 - (IBAction)onTapLogOut:(id)sender {
     [self logOut];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    
 
 }
 - (IBAction)didTapCamera:(id)sender {
@@ -80,10 +81,9 @@
 }
 
 - (void) logOut {
-    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
-        // PFUser.current() will now be nil
-        NSLog(@"Logged Out Successfully");
-    }];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate logout];
+    
 }
 
 
@@ -91,12 +91,15 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    DetailsViewController *detailsVC = [segue destinationViewController];
-    // Pass the selected object to the new view controller.
-    InstaTableViewCell *cell = sender;
-    NSIndexPath *cellPath = [self.tableView indexPathForCell:cell];
-    detailsVC.post = self.postsArray[cellPath.row];
+    if([segue.identifier isEqualToString:@"detailsSegue"])
+    {
+        // Get the new view controller using [segue destinationViewController].
+        DetailsViewController *detailsVC = [segue destinationViewController];
+        // Pass the selected object to the new view controller.
+        InstaTableViewCell *cell = sender;
+        NSIndexPath *cellPath = [self.tableView indexPathForCell:cell];
+        detailsVC.post = self.postsArray[cellPath.row];
+    }
 }
 
 

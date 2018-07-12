@@ -39,6 +39,7 @@
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
         if (error != nil) {
             NSLog(@"Error: %@", error.localizedDescription);
+            [self showAlertWithTitle:@"Error Signing Up" Message:@"Could not sign up :("];
         } else {
             NSLog(@"User registered successfully");
             
@@ -71,6 +72,7 @@
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
         if (error != nil) {
             NSLog(@"User log in failed: %@", error.localizedDescription);
+            [self showAlertWithTitle:@"Error Logging In" Message:@"Invalid Username/Password or you have not yet signed up"];
         } else {
             NSLog(@"User logged in successfully");
             

@@ -8,6 +8,7 @@
 
 #import "ComposeViewController.h"
 #import "Post.h"
+#import "MBProgressHUD.h"
 
 @interface ComposeViewController () 
 @property (weak, nonatomic) IBOutlet UIImageView *composeImageView;
@@ -35,38 +36,69 @@
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
-    imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Post a photo to Instagram!" message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];
-    
-    UIAlertAction *actionCamera = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
         
-        [self presentViewController:imagePickerVC animated:YES completion:nil];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Post a photo to Instagram!" message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];
         
-    }];
-    
-    UIAlertAction *actionGallery = [UIAlertAction actionWithTitle:@"Choose Photo from Gallery" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction *actionCamera = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+            
+            [self presentViewController:imagePickerVC animated:YES completion:nil];
+            
+        }];
         
+        UIAlertAction *actionGallery = [UIAlertAction actionWithTitle:@"Choose Photo from Gallery" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            
+            [self presentViewController:imagePickerVC animated:YES completion:nil];
+            
+        }];
+        
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alert addAction:actionCamera];
+        [alert addAction:actionGallery];
+        [alert addAction:cancel];
+        
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+        
+    }
+    else {
+        NSLog(@"Camera 🚫 available so we will use photo library instead");
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         
-        [self presentViewController:imagePickerVC animated:YES completion:nil];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Post a photo to Instagram!" message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];
         
-    }];
-    
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction *actionGallery = [UIAlertAction actionWithTitle:@"Choose Photo from Gallery" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            
+            [self presentViewController:imagePickerVC animated:YES completion:nil];
+            
+        }];
         
-    }];
-    
-    [alert addAction:actionCamera];
-    [alert addAction:actionGallery];
-    [alert addAction:cancel];
-
-    
-    [self presentViewController:alert animated:YES completion:^{
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
         
-    }];
+        [alert addAction:actionGallery];
+        [alert addAction:cancel];
+        
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+    }
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
@@ -102,6 +134,8 @@
 }
 
 - (IBAction)didTapShare:(id)sender {
+    // show progressHUD
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     // get caption text
     NSString *captionText = self.composeTextView.text;
     // create a post for the current user using the post class
@@ -111,13 +145,15 @@
         } else {
             NSLog(@"User posted photo and caption successfully!");
             [self dismissViewControllerAnimated:YES completion:nil];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
         }
     }];
 }
-//- (IBAction)didTapCancel:(id)sender {
-//    // dismiss the view controller
-//    [self dismissViewControllerAnimated:YES completion:nil];
-//}
+
+- (IBAction)didTapCancel:(id)sender {
+    // dismiss the view controller
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 /*
 #pragma mark - Navigation
