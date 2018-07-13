@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePhotoView;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
+@property (weak, nonatomic) IBOutlet UILabel *bioLabel;
 
 
 @end
@@ -65,15 +66,17 @@
     }];
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
+    EditProfileViewController *editVC = [segue destinationViewController];
     // Pass the selected object to the new view controller.
+    editVC.delegate = self;
 }
-*/
+
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     profileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"profileCell"];
@@ -91,6 +94,13 @@
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.postsArray.count;
+}
+
+
+// delegate protocol method that provides access to edited bio and image
+- (void)editedBioAndPic:(UIImage *)newProfilePic editedBio:(NSString *)newBio {
+    self.bioLabel.text = newBio;
+    self.profilePhotoView.image = newProfilePic;
 }
 
 

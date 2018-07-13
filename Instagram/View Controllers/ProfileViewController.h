@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EditProfileViewController.h"
 
-@interface ProfileViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface ProfileViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, EditProfileDelegate>
 @property (strong, nonatomic) NSArray *postsArray;
 @end
