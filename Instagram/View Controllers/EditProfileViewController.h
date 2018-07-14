@@ -7,16 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ParseUI/ParseUI.h>
+#import <Parse/Parse.h>
 
 @class EditProfileViewController;
 
-@protocol EditProfileDelegate
-
--(void) editedBioAndPic:(UIImage *)newProfilePic editedBio:(NSString *)newBio;
-@end
-
 @interface EditProfileViewController : UIViewController <UIImagePickerControllerDelegate>
+// property that stores the block accessed by ProfileVC
+@property (strong, nonatomic) void (^sendPicAndBioBlock)(UIImage *newImage, NSString *newBio);
 @property (weak, nonatomic) IBOutlet UITextView *editBioLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *editedProfileView;
-@property (weak, nonatomic) id <EditProfileDelegate> delegate;
+@property (weak, nonatomic) IBOutlet PFImageView *editedProfileView;
 @end

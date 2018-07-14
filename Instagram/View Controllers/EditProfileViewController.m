@@ -23,9 +23,14 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (IBAction)didTapCancel:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (IBAction)didTapSave:(id)sender {
     // call delegate function to pass the edited image and bio
-    [self.delegate editedBioAndPic:self.editedProfileView.image editedBio:self.editBioLabel.text];
+    self.sendPicAndBioBlock(self.editedProfileView.image, self.editBioLabel.text);
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }

@@ -12,3 +12,5 @@
 @interface DetailsViewController : UIViewController
 @property (strong, nonatomic) Post *post;
 @end
+
+

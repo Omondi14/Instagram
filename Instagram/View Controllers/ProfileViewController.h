@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "EditProfileViewController.h"
 
-@interface ProfileViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, EditProfileDelegate>
+@interface ProfileViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSArray *postsArray;
 @end

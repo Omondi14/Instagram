@@ -14,6 +14,7 @@
 
 
 @interface ProfileViewController ()
+@property (strong, nonatomic) PFUser *currUser;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePhotoView;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -30,9 +31,19 @@
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
     
-    // get current users username
-    PFUser *current = [PFUser currentUser];
-    self.usernameLabel.text = current.username;
+    // get current users username, profile pic and bio
+    self.currUser = [PFUser currentUser];
+    self.usernameLabel.text = self.currUser.username;
+    self.bioLabel.text = self.currUser[@"bio"];
+    
+    // set image for profile pic
+    PFFile* file = self.currUser[@"profilePic"];
+    [file getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if(error == nil)
+        {
+            [self.profilePhotoView setImage:[UIImage imageWithData:data]];
+        }
+    }];
     
     //fetch posts for the current user
     [self fetchPosts];
@@ -73,8 +84,19 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     EditProfileViewController *editVC = [segue destinationViewController];
-    // Pass the selected object to the new view controller.
-    editVC.delegate = self;
+    // Set the block property of editVC as a block that you define here that will be called at some point by the editVC
+    [editVC setSendPicAndBioBlock:^(UIImage *newImage, NSString *newBio) {
+        self.profilePhotoView.image = newImage;
+        self.bioLabel.text = newBio;
+        
+        // Add a profile and bio property to the currentUser object of PFUser
+        PFFile *file = [PFFile fileWithName:@"profilePic.png" data:UIImagePNGRepresentation(newImage)];
+        self.currUser[@"profilePic"] = file;
+        self.currUser[@"bio"] = newBio;
+        
+        // save the currentUser in background on the Parse server
+        [self.currUser saveInBackground];
+    }];
 }
 
 
@@ -95,14 +117,5 @@
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.postsArray.count;
 }
-
-
-// delegate protocol method that provides access to edited bio and image
-- (void)editedBioAndPic:(UIImage *)newProfilePic editedBio:(NSString *)newBio {
-    self.bioLabel.text = newBio;
-    self.profilePhotoView.image = newProfilePic;
-}
-
-
 
 @end
